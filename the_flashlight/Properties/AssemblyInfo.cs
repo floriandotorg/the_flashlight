@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyTitle("the_flashlight")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Floyd UG (haftungsbeschränkt)")]
 [assembly: AssemblyProduct("the_flashlight")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]

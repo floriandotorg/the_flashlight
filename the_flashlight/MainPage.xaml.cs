@@ -20,21 +20,10 @@ namespace the_flashlight
         private VideoCamera _videoCamera;
         private VideoCameraVisualizer _videoCameraVisualizer;
 
-        private bool ready = false;
-
         // Konstruktor
         public MainPage()
         {
             InitializeComponent();
-
-            this.off_to_on.Completed += (object sender, EventArgs e) =>
-            {
-                ready = true;
-            };
-            this.on_to_off.Completed += (object sender, EventArgs e) =>
-            {
-                ready = true;
-            };
 
             if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
             {
@@ -46,9 +35,6 @@ namespace the_flashlight
                 // Add the photo camera to the video source
                 _videoCameraVisualizer = new VideoCameraVisualizer();
                 _videoCameraVisualizer.SetSource(_videoCamera);
-
-                ready = false;
-                this.off_to_on.Begin();
             }
             else
             {
@@ -56,57 +42,9 @@ namespace the_flashlight
             }
         }
 
-        private void switch_lamp()
+        private void InfoTap(object sender, Microsoft.Phone.Controls.GestureEventArgs e)
         {
-
-
-            if (_videoCamera.LampEnabled)
-            {
-                if (Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
-                {
-                    _videoCamera.LampEnabled = false;
-                    _videoCamera.StopRecording();
-                }
-
-                ready = false;
-                this.on_to_off.Begin();
-            }
-            else
-            {
-                if (Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
-                {
-                    _videoCamera.LampEnabled = true;
-                    _videoCamera.StartRecording();
-                }
-
-                ready = false;
-                this.off_to_on.Begin();
-            }
-        }
-
-        void OnTouchFrameReported(object sender, TouchFrameEventArgs args)
-        {
-            TouchPoint primaryTouchPoint = args.GetPrimaryTouchPoint(null);
-
-            if(ready && primaryTouchPoint != null && primaryTouchPoint.Action == TouchAction.Down)
-            {
-                if(primaryTouchPoint.Position.X > 420 && primaryTouchPoint.Position.Y > 740)
-                {
-                    ready = false;
-                    NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
-                }
-                else
-                {
-                    switch_lamp();
-                }
-            }
-        }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            ready = true;
+            NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
         }
 
         private void VideoCamera_Initialized(object sender, EventArgs e)
@@ -114,10 +52,10 @@ namespace the_flashlight
             _videoCamera.LampEnabled = true;
             _videoCamera.StartRecording();
 
-            this.Dispatcher.BeginInvoke(() =>
-            {
-                Touch.FrameReported += OnTouchFrameReported;
-            }
+            this.Dispatcher.BeginInvoke ( () =>
+                {
+                    this.image_on.Visibility = Visibility.Visible;
+                }
             );
         }
     }

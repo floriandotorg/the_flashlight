@@ -106,7 +106,6 @@
     <Resource Include="inapp_back_off.png" />
     <Resource Include="inapp_back_on.png" />
     <Resource Include="info.png" />
-    <Resource Include="pfeil.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Resource Include="Toolkit.Content\ApplicationBar.Check.png" />
