@@ -37,6 +37,8 @@ namespace the_flashlight
             // Phone-spezifische Initialisierung
             InitializePhoneApplication();
 
+            PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+
             //// Während des Debuggens Profilerstellungsinformationen zur Grafikleistung anzeigen.
             //if (System.Diagnostics.Debugger.IsAttached)
             //{
