@@ -15,7 +15,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="true" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100">
 	<animation:AnimatedBasePage.ApplicationBar>
-		<shell:ApplicationBar Mode="Default" Opacity="0">
+		<shell:ApplicationBar Mode="Default" Opacity="0" ForegroundColor="#FDFFFFFF">
 			<shell:ApplicationBar.MenuItems>
 				<shell:ApplicationBarMenuItem IsEnabled="True" Text="about" Click="ApplicationBarMenuItem_Click"/>
 			</shell:ApplicationBar.MenuItems>
