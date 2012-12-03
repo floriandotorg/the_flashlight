@@ -12,7 +12,8 @@ namespace Flashlight
 		private PropertyInfo _videoCameraLampEnabledPropertyInfo;
         private MethodInfo _videoCameraStartRecordingMethod;
         private MethodInfo _videoCameraStopRecordingMethod;
-		private EventHandler _videoCameraInitialized;
+        private EventHandler _videoCameraInitialized;
+        private EventHandler _videoCameraRecordingStarted;
 
 		public object InnerCameraObject
 		{
@@ -45,10 +46,16 @@ namespace Flashlight
             _videoCameraStartRecordingMethod = videoCameraType.GetMethod("StartRecording");
             _videoCameraStopRecordingMethod = videoCameraType.GetMethod("StopRecording");
 
+            MethodInfo addInitializedEventMethodInfo;
+
 			// Let the initialize event bubble through.
-			_videoCameraInitialized = new EventHandler(VideoCamera_Initialized);
-			MethodInfo addInitializedEventMethodInfo = videoCameraType.GetMethod("add_Initialized");
-			addInitializedEventMethodInfo.Invoke(_videoCamera, new object[] { _videoCameraInitialized });
+            _videoCameraRecordingStarted = new EventHandler(VideoCamera_RecordingStarted);
+			addInitializedEventMethodInfo = videoCameraType.GetMethod("add_RecordingStarted");
+            addInitializedEventMethodInfo.Invoke(_videoCamera, new object[] { _videoCameraRecordingStarted });
+
+            _videoCameraInitialized = new EventHandler(VideoCamera_Initialized);
+            addInitializedEventMethodInfo = videoCameraType.GetMethod("add_Initialized");
+            addInitializedEventMethodInfo.Invoke(_videoCamera, new object[] { _videoCameraInitialized });
 		}
 
 		/// <summary>
@@ -68,6 +75,17 @@ namespace Flashlight
 				Initialized.Invoke(this, new EventArgs());
 			}
 		}
+
+
+        public event EventHandler RecordingStarted;
+
+        private void VideoCamera_RecordingStarted(object sender, object eventArgs)
+        {
+            if (RecordingStarted != null)
+            {
+                RecordingStarted.Invoke(this, new EventArgs());
+            }
+        }
 
 		/// <summary>
 		/// Start recording.

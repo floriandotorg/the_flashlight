@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
 using Flashlight;
+using System.Reflection;
 using WP7Contrib.View.Transitions.Animation;
 
 namespace the_flashlight
@@ -25,6 +26,7 @@ namespace the_flashlight
         public MainPage()
         {
             (App.Current.Resources["PhoneForegroundBrush"] as SolidColorBrush).Color = Colors.White;
+            (App.Current.Resources["PhoneDisabledBrush"] as SolidColorBrush).Color = Colors.White;
             (App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush).Color = Colors.Black;
 
             InitializeComponent();
@@ -39,6 +41,7 @@ namespace the_flashlight
 
                 // Event is fired when the video camera object has been initialized.
                 _videoCamera.Initialized += VideoCamera_Initialized;
+                _videoCamera.RecordingStarted += VideoCamera_RecordingStarted;
 
                 // Add the photo camera to the video source
                 _videoCameraVisualizer = new VideoCameraVisualizer();
@@ -50,6 +53,16 @@ namespace the_flashlight
             }
 
             var preload = new InfoPage();
+        }
+
+        private void VideoCamera_RecordingStarted(object sender, EventArgs e)
+        {
+            this.Dispatcher.BeginInvoke(() =>
+                {
+                    TransitionFrame frame = (TransitionFrame)App.Current.RootVisual;
+                    frame.IsEnabled = true;
+                }
+            );
         }
 
         private void VideoCamera_Initialized(object sender, EventArgs e)
@@ -96,6 +109,9 @@ namespace the_flashlight
 
         public void Application_Deactivated()
         {
+            TransitionFrame frame = (TransitionFrame)App.Current.RootVisual;
+            frame.IsEnabled = false;
+
             _videoCamera.StopRecording();
         }
     }

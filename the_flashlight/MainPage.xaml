@@ -12,8 +12,7 @@
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="true" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100">
+    SupportedOrientations="Portrait" Orientation="Portrait" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100" shell:SystemTray.IsVisible="True">
 	<animation:AnimatedBasePage.ApplicationBar>
 		<shell:ApplicationBar Mode="Default" Opacity="0" ForegroundColor="#FDFFFFFF">
 			<shell:ApplicationBar.MenuItems>
