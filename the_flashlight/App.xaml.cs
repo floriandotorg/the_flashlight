@@ -12,6 +12,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using WP7Contrib.View.Transitions.Animation;
+using the_flashlight;
 
 namespace the_flashlight
 {
@@ -61,6 +63,8 @@ namespace the_flashlight
 
         }
 
+        public MainPage main_page;
+
         // Code, der beim Starten der Anwendung ausgeführt werden soll (z. B. über "Start")
         // Dieser Code wird beim Reaktivieren der Anwendung nicht ausgeführt
         private void Application_Launching(object sender, LaunchingEventArgs e)
@@ -71,12 +75,14 @@ namespace the_flashlight
         // Dieser Code wird beim ersten Starten der Anwendung nicht ausgeführt
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            main_page.Application_Activated();
         }
 
         // Code, der ausgeführt werden soll, wenn die Anwendung deaktiviert wird (in den Hintergrund gebracht wird)
         // Dieser Code wird beim Schließen der Anwendung nicht ausgeführt
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            main_page.Application_Deactivated();
         }
 
         // Code, der beim Schließen der Anwendung ausgeführt wird (z. B. wenn der Benutzer auf "Zurück" klickt)

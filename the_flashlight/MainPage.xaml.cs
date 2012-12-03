@@ -29,6 +29,8 @@ namespace the_flashlight
 
             InitializeComponent();
 
+            ((the_flashlight.App)App.Current).main_page = this;
+
             AnimationContext = LayoutRoot;
 
             if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
@@ -85,6 +87,16 @@ namespace the_flashlight
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
+        }
+
+        public void Application_Activated()
+        {
+            _videoCameraVisualizer.SetSource(_videoCamera);
+        }
+
+        public void Application_Deactivated()
+        {
+            _videoCamera.StopRecording();
         }
     }
 }
