@@ -12,14 +12,17 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Info;
+using WP7Contrib.View.Transitions.Animation;
 
 namespace the_flashlight
 {
-    public partial class InfoPage : PhoneApplicationPage
+    public partial class InfoPage : AnimatedBasePage
     {
         public InfoPage()
         {
             InitializeComponent();
+
+            AnimationContext = LayoutRoot;
         }
 
         private void rate_click(object sender, System.Windows.RoutedEventArgs e)
@@ -44,6 +47,26 @@ namespace the_flashlight
             emailComposeTask.To = "support.flashlight@floyd-ug.de";
 
             emailComposeTask.Show();
+        }
+
+        protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)
+        {
+            if (animationType == AnimationType.NavigateForwardOut)
+            {
+                return new SlideDownAnimator { RootElement = LayoutRoot };
+            }
+
+            if (animationType == AnimationType.NavigateBackwardOut)
+            {
+                return new SlideDownAnimator { RootElement = LayoutRoot };
+            }
+
+            if (animationType == AnimationType.NavigateForwardIn)
+            {
+                return new SlideUpAnimator { RootElement = LayoutRoot };
+            }
+
+            return new SlideUpAnimator { RootElement = this.LayoutRoot };
         }
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>WP7Contrib.Controls</id>
+    <version>1.0.0.16</version>
+    <title>WP7Contrib.Controls</title>
+    <authors>WP7Contrib</authors>
+    <owners>WP7Contrib</owners>
+    <licenseUrl>http://wp7contrib.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wp7contrib.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>WP7Contrib UI controls assemblies, contains the UI controls, behaviours, transitions &amp; more.
+Contains the following assemblies:
+
+WP7Contrib.View.Controls.dll
+WP7Contrib.View.Transitions.dll</description>
+    <summary>WP7Contrib UI controls &amp; transitions assemblies</summary>
+    <tags>wp wp7 wp71 wp7contrib</tags>
+    <dependencies>
+      <dependency id="Rx-Main" version="1.0.10621" />
+      <dependency id="Rx-Xaml" version="1.0.10621" />
+      <dependency id="SilverlightToolkitWP" version="4.2011.11.15" />
+      <dependency id="WP7Contrib.Core" version="1.0.0.16" />
+    </dependencies>
+  </metadata>
+</package>

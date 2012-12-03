@@ -1,4 +1,4 @@
-﻿<phone:PhoneApplicationPage 
+﻿<animation:AnimatedBasePage
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -6,40 +6,17 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animation="clr-namespace:WP7Contrib.View.Transitions.Animation;assembly=WP7Contrib.View.Transitions"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	x:Class="the_flashlight.InfoPage"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
 	Orientation="Portrait"
 	shell:SystemTray.IsVisible="true" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100">
-    
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:SlideTransition Mode="SlideLeftFadeIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:SlideTransition Mode="SlideRightFadeOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-
-    <phone:PhoneApplicationPage.Foreground>
-		<SolidColorBrush Color="White"/>
-	</phone:PhoneApplicationPage.Foreground>
 
 	<!--Das LayoutRoot-Objekt ist das Stammraster, das den gesamten Seiteninhalt aufnimmt.-->
-	<Grid x:Name="LayoutRoot" Background="#FD000000">
+	<Grid x:Name="LayoutRoot">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -47,7 +24,7 @@
 		
 		<!--Das TitlePanel-Objekt enthält den Namen der Anwendung und den Seitentitel.-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" Text="The Flashlight" Style="{StaticResource PhoneTextNormalStyle}" Foreground="White"/>
+			<TextBlock x:Name="ApplicationTitle" Text="The Flashlight" Style="{StaticResource PhoneTextNormalStyle}"/>
 			<TextBlock x:Name="PageTitle" Text="about" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
@@ -55,8 +32,9 @@
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<TextBlock Margin="44,0,0,176" TextWrapping="Wrap" Text="Version 1.0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="168"/>
 			<Image Margin="28,28,213,256" Source="floyd.png" Stretch="Fill"/>
-			<Button Height="72" Margin="192,0,8,157" VerticalAlignment="Bottom" Content="rate and review" Click="rate_click" BorderBrush="White" Foreground="White" Background="Transparent" />
-			<Button Height="72" Margin="156,0,44,56" VerticalAlignment="Bottom" Content="contact support" Click="contact_click" BorderBrush="White" Foreground="White" Background="Transparent" />
+			<Button Height="72" Margin="192,0,8,157" VerticalAlignment="Bottom" Content="rate and review" Click="rate_click" />
+			<Button Height="72" Margin="156,0,44,56" VerticalAlignment="Bottom" Content="contact support" Click="contact_click" />
 		</Grid>
 	</Grid>
-</phone:PhoneApplicationPage>
+
+</animation:AnimatedBasePage>

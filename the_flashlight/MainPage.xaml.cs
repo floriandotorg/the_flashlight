@@ -12,10 +12,11 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
 using Flashlight;
+using WP7Contrib.View.Transitions.Animation;
 
 namespace the_flashlight
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage : AnimatedBasePage
     {
         private VideoCamera _videoCamera;
         private VideoCameraVisualizer _videoCameraVisualizer;
@@ -23,7 +24,12 @@ namespace the_flashlight
         // Konstruktor
         public MainPage()
         {
+            (App.Current.Resources["PhoneForegroundBrush"] as SolidColorBrush).Color = Colors.White;
+            (App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush).Color = Colors.Black;
+
             InitializeComponent();
+
+            AnimationContext = LayoutRoot;
 
             if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
             {
@@ -57,6 +63,26 @@ namespace the_flashlight
                     this.image_on.Visibility = Visibility.Visible;
                 }
             );
+        }
+
+        protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)
+        {
+            if (animationType == AnimationType.NavigateForwardOut)
+            {
+                return new SlideDownAnimator { RootElement = LayoutRoot };
+            }
+
+            if (animationType == AnimationType.NavigateBackwardOut)
+            {
+                return new SlideDownAnimator { RootElement = LayoutRoot };
+            }
+
+            if (animationType == AnimationType.NavigateForwardIn)
+            {
+                return null;
+            }
+
+            return new SlideUpAnimator { RootElement = this.LayoutRoot };
         }
     }
 }
