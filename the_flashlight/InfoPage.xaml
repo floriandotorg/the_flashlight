@@ -11,8 +11,8 @@
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Orientation="Portrait"
-	shell:SystemTray.IsVisible="True" Background="Black" BorderBrush="Black">
-
+	shell:SystemTray.IsVisible="true" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100">
+    
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
@@ -55,8 +55,8 @@
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<TextBlock Margin="44,0,0,176" TextWrapping="Wrap" Text="Version 1.0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="168"/>
 			<Image Margin="28,28,213,256" Source="floyd.png" Stretch="Fill"/>
-			<Button Height="72" Margin="192,0,8,157" VerticalAlignment="Bottom" Content="rate and review" Click="rate_click" />
-			<Button Height="72" Margin="156,0,44,56" VerticalAlignment="Bottom" Content="contact support" Click="contact_click" />
+			<Button Height="72" Margin="192,0,8,157" VerticalAlignment="Bottom" Content="rate and review" Click="rate_click" BorderBrush="White" Foreground="White" Background="Transparent" />
+			<Button Height="72" Margin="156,0,44,56" VerticalAlignment="Bottom" Content="contact support" Click="contact_click" BorderBrush="White" Foreground="White" Background="Transparent" />
 		</Grid>
 	</Grid>
 </phone:PhoneApplicationPage>
