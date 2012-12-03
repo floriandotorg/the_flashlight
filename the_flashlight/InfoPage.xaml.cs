@@ -13,16 +13,25 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Info;
 using WP7Contrib.View.Transitions.Animation;
+using System.Reflection;
 
 namespace the_flashlight
 {
     public partial class InfoPage : AnimatedBasePage
     {
+        private string version_str;
+
         public InfoPage()
         {
             InitializeComponent();
 
             AnimationContext = LayoutRoot;
+
+            // Get Version
+            var versionAttrib = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
+            version_str = versionAttrib.Version.ToString();
+
+            this.version_text.Text = "Version: " + version_str;
         }
 
         private void rate_click(object sender, System.Windows.RoutedEventArgs e)
@@ -43,7 +52,7 @@ namespace the_flashlight
                 result = deviceName.ToString(); 
             }
 
-            emailComposeTask.Subject = "The Flashlight Version 1.0 on " + result;
+            emailComposeTask.Subject = "The Flashlight Version " + version_str + " on " + result;
             emailComposeTask.To = "support.flashlight@floyd-ug.de";
 
             emailComposeTask.Show();
