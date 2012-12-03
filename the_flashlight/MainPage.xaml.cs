@@ -46,6 +46,8 @@ namespace the_flashlight
             {
                 MessageBox.Show("This device does not have a flashlight. Application won't work.");
             }
+
+            var preload = new InfoPage();
         }
 
         private void InfoTap(object sender, Microsoft.Phone.Controls.GestureEventArgs e)

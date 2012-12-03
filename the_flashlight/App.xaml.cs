@@ -93,6 +93,8 @@ namespace the_flashlight
                 // Navigationsfehler. Unterbrechen und Debugger öffnen
                 System.Diagnostics.Debugger.Break();
             }
+
+            MessageBox.Show(e.ToString());
         }
 
         // Code, der bei nicht behandelten Ausnahmen ausgeführt wird
@@ -103,6 +105,8 @@ namespace the_flashlight
                 // Eine nicht behandelte Ausnahme ist aufgetreten. Unterbrechen und Debugger öffnen
                 System.Diagnostics.Debugger.Break();
             }
+
+            MessageBox.Show(e.ToString());
         }
 
         #region Initialisierung der Phone-Anwendung
