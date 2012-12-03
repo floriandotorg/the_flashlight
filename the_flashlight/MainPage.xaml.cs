@@ -50,11 +50,6 @@ namespace the_flashlight
             var preload = new InfoPage();
         }
 
-        private void InfoTap(object sender, Microsoft.Phone.Controls.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
-        }
-
         private void VideoCamera_Initialized(object sender, EventArgs e)
         {
             _videoCamera.LampEnabled = true;
@@ -85,6 +80,11 @@ namespace the_flashlight
             }
 
             return new SlideUpAnimator { RootElement = this.LayoutRoot };
+        }
+
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
         }
     }
 }
