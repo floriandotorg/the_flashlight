@@ -31,7 +31,7 @@ namespace the_flashlight
             var versionAttrib = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
             version_str = versionAttrib.Version.ToString();
 
-            this.version_text.Text = "Version: " + version_str;
+            this.version_text.Text = this.version_text.Text + version_str;
         }
 
         private void rate_click(object sender, System.Windows.RoutedEventArgs e)
