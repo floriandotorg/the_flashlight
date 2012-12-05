@@ -69,12 +69,6 @@ namespace the_flashlight
         {
             _videoCamera.LampEnabled = true;
             _videoCamera.StartRecording();
-
-            this.Dispatcher.BeginInvoke ( () =>
-                {
-                    this.image_on.Visibility = Visibility.Visible;
-                }
-            );
         }
 
         protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)

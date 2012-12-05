@@ -26,7 +26,6 @@
         	<RowDefinition Height="Auto"/>
         	<RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="image_on" Margin="96,184,96,296" Grid.Row="1" Source="flashlight.png" Stretch="Fill" Height="288"/>
     </Grid>
 
 </animation:AnimatedBasePage>
