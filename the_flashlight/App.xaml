@@ -7,6 +7,7 @@
 
     <!--Anwendungsressourcen-->
     <Application.Resources>
+        <local:LocalizedStrings xmlns:local="clr-namespace:the_flashlight" x:Key="LocalizedStrings" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

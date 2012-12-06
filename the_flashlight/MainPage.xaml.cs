@@ -31,6 +31,8 @@ namespace the_flashlight
 
             InitializeComponent();
 
+            BuildApplicationBar();
+
             ((the_flashlight.App)App.Current).main_page = this;
 
             AnimationContext = LayoutRoot;
@@ -53,6 +55,19 @@ namespace the_flashlight
             }
 
             var preload = new InfoPage();
+        }
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new Microsoft.Phone.Shell.ApplicationBar();
+
+            ApplicationBar.ForegroundColor = Color.FromArgb(0xFD, 0xFF, 0xFF, 0xFF);
+            ApplicationBar.Opacity = 0;
+
+            Microsoft.Phone.Shell.ApplicationBarMenuItem appBarMenuItem = new Microsoft.Phone.Shell.ApplicationBarMenuItem(AppResources.about);
+            appBarMenuItem.Click += ApplicationBarMenuItem_Click;
+            ApplicationBar.MenuItems.Add(appBarMenuItem);
+
         }
 
         private void VideoCamera_RecordingStarted(object sender, EventArgs e)

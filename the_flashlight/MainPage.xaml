@@ -13,13 +13,6 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     SupportedOrientations="Portrait" Orientation="Portrait" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100" shell:SystemTray.IsVisible="True">
-	<animation:AnimatedBasePage.ApplicationBar>
-		<shell:ApplicationBar Mode="Default" Opacity="0" ForegroundColor="#FDFFFFFF">
-			<shell:ApplicationBar.MenuItems>
-				<shell:ApplicationBarMenuItem IsEnabled="True" Text="about" Click="ApplicationBarMenuItem_Click"/>
-			</shell:ApplicationBar.MenuItems>
-		</shell:ApplicationBar>
-	</animation:AnimatedBasePage.ApplicationBar>
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
