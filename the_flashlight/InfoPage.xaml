@@ -24,17 +24,21 @@
 		
 		<!--Das TitlePanel-Objekt enthält den Namen der Anwendung und den Seitentitel.-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" Text="The Flashlight" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="about" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+			<TextBlock x:Name="ApplicationTitle" Text="The Flashlight" Style="{StaticResource PhoneTextNormalStyle}" Margin="102,0,10,0"/>
+			<TextBlock x:Name="PageTitle" Text="about" Margin="100,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
 		<!--ContentPanel-Objekt - Fügen Sie zusätzlichen Inhalt hier ein.-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<TextBlock x:Name="version_text" Margin="8,8,108,0" TextWrapping="Wrap" Height="32" VerticalAlignment="Top"><Run Text="The "/><Run Text="Flashlight "/><Run Text="Version "/></TextBlock>
-			<Image Margin="10,233,218,31" Source="floyd.png" Stretch="Fill"/>
-			<Button Height="72" Margin="-4,74,204,0" VerticalAlignment="Top" Content="rate and review" Click="rate_click" />
-			<Button Height="72" Margin="-4,143,204,0" VerticalAlignment="Top" Content="contact support" Click="contact_click" />
+			<TextBlock x:Name="version_text" Margin="8,8,108,0" TextWrapping="Wrap" Height="31" VerticalAlignment="Top"><Run Text="The "/><Run Text="Flashlight"/><Run Text=" "/><Run Text="Version "/><Run Text="1.0.0.0"/><LineBreak/><Run/><LineBreak/><Run Text=""/></TextBlock>
+			<Button Margin="-4,0,204,196" Content="rate and review" Click="rate_click" Height="72" VerticalAlignment="Bottom" />
+			<Button Height="72" Margin="-4,159,204,0" VerticalAlignment="Top" Content="contact support" Click="contact_click" />
+			<Image HorizontalAlignment="Left" Source="floyd.png" Stretch="Fill" Width="96" Height="146" VerticalAlignment="Top" Margin="-4,-152,0,0"/>
+			<TextBlock Margin="8,283,64,272" TextWrapping="Wrap" Foreground="#FF8B8B8B" Text="If you like this app, please consider to rate and review."/>
+			<TextBlock Margin="8,99,12,0" TextWrapping="Wrap" Foreground="#FF8B8B8B" Height="56" VerticalAlignment="Top"><Run Text="You have questions"/><Run Text=" or"/><Run Text=" comments"/><Run Text="?"/><LineBreak/><Run Text="Contact "/><Run Text="us"/><Run Text=", we'd love to get your feedback."/></TextBlock>
 		</Grid>
+		<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="32,4,0,0" Stroke="White" VerticalAlignment="Top" Width="128" Visibility="Collapsed"/>
+		<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="21" Margin="32,0,0,25" Stroke="White" VerticalAlignment="Bottom" Width="128" Visibility="Collapsed"/>
 	</Grid>
 
 </animation:AnimatedBasePage>
