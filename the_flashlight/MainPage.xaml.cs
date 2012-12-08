@@ -14,6 +14,7 @@ using Microsoft.Devices;
 using Flashlight;
 using System.Reflection;
 using WP7Contrib.View.Transitions.Animation;
+using Microsoft.Phone.Info;
 
 namespace the_flashlight
 {
@@ -25,36 +26,54 @@ namespace the_flashlight
         // Konstruktor
         public MainPage()
         {
-            (App.Current.Resources["PhoneForegroundBrush"] as SolidColorBrush).Color = Colors.White;
-            (App.Current.Resources["PhoneDisabledBrush"] as SolidColorBrush).Color = Colors.White;
-            (App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush).Color = Colors.Black;
-
-            InitializeComponent();
-
-            BuildApplicationBar();
-
-            ((the_flashlight.App)App.Current).main_page = this;
-
-            AnimationContext = LayoutRoot;
-
-            if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
+            try
             {
-                _videoCamera = new VideoCamera();
+                (App.Current.Resources["PhoneForegroundBrush"] as SolidColorBrush).Color = Colors.White;
+                (App.Current.Resources["PhoneDisabledBrush"] as SolidColorBrush).Color = Colors.White;
+                (App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush).Color = Colors.Black;
 
-                // Event is fired when the video camera object has been initialized.
-                _videoCamera.Initialized += VideoCamera_Initialized;
-                _videoCamera.RecordingStarted += VideoCamera_RecordingStarted;
+                InitializeComponent();
 
-                // Add the photo camera to the video source
-                _videoCameraVisualizer = new VideoCameraVisualizer();
-                _videoCameraVisualizer.SetSource(_videoCamera);
+                BuildApplicationBar();
+
+                ((the_flashlight.App)App.Current).main_page = this;
+
+                AnimationContext = LayoutRoot;
+
+                string deviceNameStr = "unknown device";
+                object deviceName;
+                if(DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
+                {
+                    deviceNameStr = deviceName.ToString(); 
+                }
+
+                if (deviceNameStr.Contains("Mozart"))
+                {
+                    this.error_txt.Text = AppResources.err_xenon;
+                }
+                else if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary) && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
+                {
+                    _videoCamera = new VideoCamera();
+
+                    // Event is fired when the video camera object has been initialized.
+                    _videoCamera.Initialized += VideoCamera_Initialized;
+                    _videoCamera.RecordingStarted += VideoCamera_RecordingStarted;
+
+                    // Add the photo camera to the video source
+                    _videoCameraVisualizer = new VideoCameraVisualizer();
+                    _videoCameraVisualizer.SetSource(_videoCamera);
+                }
+                else
+                {
+                    this.error_txt.Text = AppResources.err_no_flash;
+                }
+
+                var preload = new InfoPage();
             }
-            else
+            catch
             {
-                MessageBox.Show("This device does not have a flashlight. Application won't work.");
+                Application_Error();
             }
-
-            var preload = new InfoPage();
         }
 
         private void BuildApplicationBar()
@@ -122,6 +141,11 @@ namespace the_flashlight
             frame.IsEnabled = false;
 
             _videoCamera.StopRecording();
+        }
+
+        public void Application_Error()
+        {
+            this.error_txt.Text = AppResources.err_unknown;
         }
     }
 }

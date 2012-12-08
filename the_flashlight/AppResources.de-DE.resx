@@ -126,6 +126,15 @@
   <data name="contact_support" xml:space="preserve">
     <value>support</value>
   </data>
+  <data name="err_no_flash" xml:space="preserve">
+    <value>Dieses Telefon hat kein Blitzlicht.</value>
+  </data>
+  <data name="err_unknown" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten. Bitte starten Sie die App neu.</value>
+  </data>
+  <data name="err_xenon" xml:space="preserve">
+    <value>Dieses Telefon hat ein Xenon-Licht und kann nicht als Taschenlampe verwendet werden.</value>
+  </data>
   <data name="rate_and_review" xml:space="preserve">
     <value>bewerten</value>
   </data>

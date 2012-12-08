@@ -88,6 +88,33 @@ namespace the_flashlight {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This device doesn&apos;t have a flashlight. Application won&apos;t work. ähnelt.
+        /// </summary>
+        public static string err_no_flash {
+            get {
+                return ResourceManager.GetString("err_no_flash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die A error occured. Please restart the application. ähnelt.
+        /// </summary>
+        public static string err_unknown {
+            get {
+                return ResourceManager.GetString("err_unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This device has a xenon flash which cannot be used as flashlight. ähnelt.
+        /// </summary>
+        public static string err_xenon {
+            get {
+                return ResourceManager.GetString("err_xenon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die rate and review ähnelt.
         /// </summary>
         public static string rate_and_review {

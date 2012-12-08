@@ -19,6 +19,7 @@
         	<RowDefinition Height="Auto"/>
         	<RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+    	<TextBlock x:Name="error_txt" HorizontalAlignment="Center" Height="161" Margin="95,304,95,303" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="290" Foreground="White" TextAlignment="Center"/>
     </Grid>
 
 </animation:AnimatedBasePage>

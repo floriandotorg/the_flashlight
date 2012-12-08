@@ -100,7 +100,9 @@ namespace the_flashlight
                 System.Diagnostics.Debugger.Break();
             }
 
-            MessageBox.Show(e.ToString());
+            System.Diagnostics.Debug.WriteLine(e.Exception.ToString());
+            main_page.Application_Error();
+            e.Handled = true;
         }
 
         // Code, der bei nicht behandelten Ausnahmen ausgeführt wird
@@ -112,7 +114,9 @@ namespace the_flashlight
                 System.Diagnostics.Debugger.Break();
             }
 
-            MessageBox.Show(e.ToString());
+            System.Diagnostics.Debug.WriteLine(e.ExceptionObject.ToString());
+            main_page.Application_Error();
+            e.Handled = true;
         }
 
         #region Initialisierung der Phone-Anwendung
