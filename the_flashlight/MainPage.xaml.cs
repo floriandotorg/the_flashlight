@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
 using Flashlight;
@@ -53,15 +54,22 @@ namespace the_flashlight
                 }
                 else if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary) && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
                 {
-                    _videoCamera = new VideoCamera();
+                    if (System.Environment.OSVersion.Version.Major == 7)
+                    {
+                        _videoCamera = new VideoCamera();
 
-                    // Event is fired when the video camera object has been initialized.
-                    _videoCamera.Initialized += VideoCamera_Initialized;
-                    _videoCamera.RecordingStarted += VideoCamera_RecordingStarted;
+                        // Event is fired when the video camera object has been initialized.
+                        _videoCamera.Initialized += VideoCamera_Initialized;
+                        _videoCamera.RecordingStarted += VideoCamera_RecordingStarted;
 
-                    // Add the photo camera to the video source
-                    _videoCameraVisualizer = new VideoCameraVisualizer();
-                    _videoCameraVisualizer.SetSource(_videoCamera);
+                        // Add the photo camera to the video source
+                        _videoCameraVisualizer = new VideoCameraVisualizer();
+                        _videoCameraVisualizer.SetSource(_videoCamera);
+                    }
+                    else
+                    {
+                        this.error_txt.Text = "Win8";
+                    }
                 }
                 else
                 {
