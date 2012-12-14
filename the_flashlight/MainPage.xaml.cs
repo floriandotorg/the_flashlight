@@ -9,10 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using System;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
-using Flashlight;
 using System.Reflection;
 using WP7Contrib.View.Transitions.Animation;
 using Microsoft.Phone.Info;
@@ -21,9 +19,6 @@ namespace the_flashlight
 {
     public partial class MainPage : AnimatedBasePage
     {
-        private VideoCamera _videoCamera;
-        private VideoCameraVisualizer _videoCameraVisualizer;
-
         // Konstruktor
         public MainPage()
         {
@@ -43,7 +38,7 @@ namespace the_flashlight
 
                 string deviceNameStr = "unknown device";
                 object deviceName;
-                if(DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
+                if (DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
                 {
                     deviceNameStr = deviceName.ToString(); 
                 }
@@ -54,22 +49,7 @@ namespace the_flashlight
                 }
                 else if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary) && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
                 {
-                    if (System.Environment.OSVersion.Version.Major == 7)
-                    {
-                        _videoCamera = new VideoCamera();
-
-                        // Event is fired when the video camera object has been initialized.
-                        _videoCamera.Initialized += VideoCamera_Initialized;
-                        _videoCamera.RecordingStarted += VideoCamera_RecordingStarted;
-
-                        // Add the photo camera to the video source
-                        _videoCameraVisualizer = new VideoCameraVisualizer();
-                        _videoCameraVisualizer.SetSource(_videoCamera);
-                    }
-                    else
-                    {
-                        this.error_txt.Text = "Win8";
-                    }
+                    
                 }
                 else
                 {
@@ -94,7 +74,6 @@ namespace the_flashlight
             Microsoft.Phone.Shell.ApplicationBarMenuItem appBarMenuItem = new Microsoft.Phone.Shell.ApplicationBarMenuItem(AppResources.about);
             appBarMenuItem.Click += ApplicationBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
-
         }
 
         private void VideoCamera_RecordingStarted(object sender, EventArgs e)
@@ -109,8 +88,8 @@ namespace the_flashlight
 
         private void VideoCamera_Initialized(object sender, EventArgs e)
         {
-            _videoCamera.LampEnabled = true;
-            _videoCamera.StartRecording();
+            //_videoCamera.LampEnabled = true;
+            //_videoCamera.StartRecording();
         }
 
         protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)
@@ -140,7 +119,7 @@ namespace the_flashlight
 
         public void Application_Activated()
         {
-            _videoCameraVisualizer.SetSource(_videoCamera);
+            //_videoCameraVisualizer.SetSource(_videoCamera);
         }
 
         public void Application_Deactivated()
@@ -148,7 +127,7 @@ namespace the_flashlight
             TransitionFrame frame = (TransitionFrame)App.Current.RootVisual;
             frame.IsEnabled = false;
 
-            _videoCamera.StopRecording();
+            //_videoCamera.StopRecording();
         }
 
         public void Application_Error()
