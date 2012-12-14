@@ -14,11 +14,16 @@ using Microsoft.Devices;
 using System.Reflection;
 using WP7Contrib.View.Transitions.Animation;
 using Microsoft.Phone.Info;
+using Windows.Phone.Media.Capture;
+using Windows.Foundation;
 
 namespace the_flashlight
 {
     public partial class MainPage : AnimatedBasePage
     {
+        private AudioVideoCaptureDevice _dev;
+        private bool _locked = false;
+
         // Konstruktor
         public MainPage()
         {
@@ -49,7 +54,25 @@ namespace the_flashlight
                 }
                 else if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary) && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
                 {
+                    IReadOnlyList<Windows.Foundation.Size> cap_res = AudioVideoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back);
+                    Windows.Foundation.Size max_s = new Windows.Foundation.Size(double.MaxValue, double.MaxValue);
+
+                    foreach (Windows.Foundation.Size s in cap_res)
+                    {
+                        if (s.Height * s.Width < max_s.Height * max_s.Width)
+                        {
+                            max_s = s;
+                        }
+                    }
+
+                    IAsyncOperation<AudioVideoCaptureDevice> dev_async_op = AudioVideoCaptureDevice.OpenAsync(CameraSensorLocation.Back, max_s);
                     
+                    dev_async_op.Completed = (IAsyncOperation<AudioVideoCaptureDevice> dev, Windows.Foundation.AsyncStatus status) =>
+                        {
+                            _dev = dev.GetResults();
+                            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchPower, AudioVideoCaptureDevice.GetSupportedPropertyRange(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchPower).Min);
+                            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
+                        };
                 }
                 else
                 {
@@ -68,28 +91,12 @@ namespace the_flashlight
         {
             ApplicationBar = new Microsoft.Phone.Shell.ApplicationBar();
 
-            ApplicationBar.ForegroundColor = Color.FromArgb(0xFD, 0xFF, 0xFF, 0xFF);
+            ApplicationBar.ForegroundColor = System.Windows.Media.Color.FromArgb(0xFD, 0xFF, 0xFF, 0xFF);
             ApplicationBar.Opacity = 0;
 
             Microsoft.Phone.Shell.ApplicationBarMenuItem appBarMenuItem = new Microsoft.Phone.Shell.ApplicationBarMenuItem(AppResources.about);
             appBarMenuItem.Click += ApplicationBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
-        }
-
-        private void VideoCamera_RecordingStarted(object sender, EventArgs e)
-        {
-            this.Dispatcher.BeginInvoke(() =>
-                {
-                    TransitionFrame frame = (TransitionFrame)App.Current.RootVisual;
-                    frame.IsEnabled = true;
-                }
-            );
-        }
-
-        private void VideoCamera_Initialized(object sender, EventArgs e)
-        {
-            //_videoCamera.LampEnabled = true;
-            //_videoCamera.StartRecording();
         }
 
         protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)
@@ -119,15 +126,22 @@ namespace the_flashlight
 
         public void Application_Activated()
         {
-            //_videoCameraVisualizer.SetSource(_videoCamera);
+            _locked = false;
+
+            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
         }
 
         public void Application_Deactivated()
         {
-            TransitionFrame frame = (TransitionFrame)App.Current.RootVisual;
-            frame.IsEnabled = false;
+            if (!_locked)
+            {
+                _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.Off);
+            }
+        }
 
-            //_videoCamera.StopRecording();
+        public void Application_Obscured()
+        {
+            _locked = true;
         }
 
         public void Application_Error()
