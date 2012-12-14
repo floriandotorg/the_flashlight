@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="about" xml:space="preserve">
-    <value>über</value>
+    <value>info</value>
   </data>
   <data name="app_name" xml:space="preserve">
     <value>Die Taschenlampe</value>
@@ -139,11 +139,11 @@
     <value>bewerten</value>
   </data>
   <data name="review" xml:space="preserve">
-    <value>Gefällt Ihnen unsere App? Bewerten Sie sie!</value>
+    <value>
+Gefällt Ihnen unsere App?</value>
   </data>
   <data name="support" xml:space="preserve">
-    <value>Sie haben Fragen oder Anregungen?
-Schreiben sie uns!</value>
+    <value>Sie haben eine Frage, eine Anregung, oder möchten uns Ihre Meinung mitteilen?</value>
   </data>
   <data name="version" xml:space="preserve">
     <value>Version</value>
