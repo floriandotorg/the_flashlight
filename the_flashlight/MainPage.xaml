@@ -20,6 +20,7 @@
         	<RowDefinition Height="*"/>
         </Grid.RowDefinitions>
     	<TextBlock x:Name="error_txt" HorizontalAlignment="Center" Height="161" Margin="95,304,95,303" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="290" Foreground="White" TextAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Left" Height="1" Margin="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="480" Fill="Black" Stroke="Black"/>
     </Grid>
 
 </animation:AnimatedBasePage>

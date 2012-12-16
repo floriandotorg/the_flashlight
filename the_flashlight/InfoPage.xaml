@@ -37,8 +37,7 @@
             <TextBlock Margin="8,350,64,0" TextWrapping="Wrap" Foreground="#FF8B8B8B" Text="{Binding Path=LocalizedResources.review, Source={StaticResource LocalizedStrings}}" Height="56" VerticalAlignment="Top"/>
             <TextBlock Margin="8,104,12,0" TextWrapping="Wrap" Foreground="#FF8B8B8B" Height="56" VerticalAlignment="Top"><Run Text="{Binding Path=LocalizedResources.support, Source={StaticResource LocalizedStrings}}" /></TextBlock>
 		</Grid>
-		<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="32,4,0,0" Stroke="White" VerticalAlignment="Top" Width="128" Visibility="Collapsed"/>
-		<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="21" Margin="32,0,0,25" Stroke="White" VerticalAlignment="Bottom" Width="128" Visibility="Collapsed"/>
-	</Grid>
+        <Rectangle HorizontalAlignment="Left" Height="1" Margin="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="480" Fill="Black" Stroke="Black"/>
+    </Grid>
 
 </animation:AnimatedBasePage>
