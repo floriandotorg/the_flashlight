@@ -52,25 +52,16 @@ namespace the_flashlight
                 {
                     this.error_txt.Text = AppResources.err_xenon;
                 }
-                else if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary) && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
+                else if ( (AudioVideoCaptureDevice.AvailableSensorLocations.Contains(CameraSensorLocation.Back)
+                    && AudioVideoCaptureDevice.GetSupportedPropertyValues(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchMode).ToList().Contains((UInt32)VideoTorchMode.On) ) 
+                    && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
                 {
-                    IReadOnlyList<Windows.Foundation.Size> cap_res = AudioVideoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back);
-                    Windows.Foundation.Size max_s = new Windows.Foundation.Size(double.MaxValue, double.MaxValue);
-
-                    foreach (Windows.Foundation.Size s in cap_res)
-                    {
-                        if (s.Height * s.Width < max_s.Height * max_s.Width)
-                        {
-                            max_s = s;
-                        }
-                    }
-
-                    IAsyncOperation<AudioVideoCaptureDevice> dev_async_op = AudioVideoCaptureDevice.OpenAsync(CameraSensorLocation.Back, max_s);
+                    IAsyncOperation<AudioVideoCaptureDevice> dev_async_op = AudioVideoCaptureDevice.OpenAsync(CameraSensorLocation.Back, AudioVideoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back).First());
                     
                     dev_async_op.Completed = (IAsyncOperation<AudioVideoCaptureDevice> dev, Windows.Foundation.AsyncStatus status) =>
                         {
                             _dev = dev.GetResults();
-                            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchPower, AudioVideoCaptureDevice.GetSupportedPropertyRange(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchPower).Min);
+                            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchPower, AudioVideoCaptureDevice.GetSupportedPropertyRange(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchPower).Max);
                             _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
                         };
                 }
@@ -126,8 +117,6 @@ namespace the_flashlight
 
         public void Application_Activated()
         {
-            _locked = false;
-
             _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
         }
 
@@ -142,6 +131,11 @@ namespace the_flashlight
         public void Application_Obscured()
         {
             _locked = true;
+        }
+
+        public void Application_Unobscured()
+        {
+            _locked = false;
         }
 
         public void Application_Error()
