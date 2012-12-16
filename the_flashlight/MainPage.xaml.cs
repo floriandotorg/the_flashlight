@@ -36,7 +36,7 @@ namespace the_flashlight
 
                 BuildApplicationBar();
 
-                ((the_flashlight.App)App.Current).main_page = this;
+                (App.Current as the_flashlight.App).main_page = this;
 
                 AnimationContext = LayoutRoot;
 
