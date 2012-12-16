@@ -24,6 +24,38 @@ namespace the_flashlight
         private AudioVideoCaptureDevice _dev;
         private bool _locked = false;
 
+        private void FlashLight()
+        {
+            string deviceNameStr = "unknown device";
+            object deviceName;
+            if (DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
+            {
+                deviceNameStr = deviceName.ToString();
+            }
+
+            if (deviceNameStr.Contains("Mozart"))
+            {
+                this.error_txt.Text = AppResources.err_xenon;
+            }
+            else if ((AudioVideoCaptureDevice.AvailableSensorLocations.Contains(CameraSensorLocation.Back)
+                && AudioVideoCaptureDevice.GetSupportedPropertyValues(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchMode).ToList().Contains((UInt32)VideoTorchMode.On))
+                && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
+            {
+                IAsyncOperation<AudioVideoCaptureDevice> dev_async_op = AudioVideoCaptureDevice.OpenAsync(CameraSensorLocation.Back, AudioVideoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back).First());
+
+                dev_async_op.Completed = (IAsyncOperation<AudioVideoCaptureDevice> dev, Windows.Foundation.AsyncStatus status) =>
+                {
+                    _dev = dev.GetResults();
+                    _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchPower, AudioVideoCaptureDevice.GetSupportedPropertyRange(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchPower).Max);
+                    _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
+                };
+            }
+            else
+            {
+                this.error_txt.Text = AppResources.err_no_flash;
+            }
+        }
+
         // Konstruktor
         public MainPage()
         {
@@ -41,34 +73,7 @@ namespace the_flashlight
 
                 AnimationContext = LayoutRoot;
 
-                string deviceNameStr = "unknown device";
-                object deviceName;
-                if (DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
-                {
-                    deviceNameStr = deviceName.ToString(); 
-                }
-
-                if (deviceNameStr.Contains("Mozart"))
-                {
-                    this.error_txt.Text = AppResources.err_xenon;
-                }
-                else if ( (AudioVideoCaptureDevice.AvailableSensorLocations.Contains(CameraSensorLocation.Back)
-                    && AudioVideoCaptureDevice.GetSupportedPropertyValues(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchMode).ToList().Contains((UInt32)VideoTorchMode.On) ) 
-                    && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
-                {
-                    IAsyncOperation<AudioVideoCaptureDevice> dev_async_op = AudioVideoCaptureDevice.OpenAsync(CameraSensorLocation.Back, AudioVideoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back).First());
-                    
-                    dev_async_op.Completed = (IAsyncOperation<AudioVideoCaptureDevice> dev, Windows.Foundation.AsyncStatus status) =>
-                        {
-                            _dev = dev.GetResults();
-                            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchPower, AudioVideoCaptureDevice.GetSupportedPropertyRange(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchPower).Max);
-                            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
-                        };
-                }
-                else
-                {
-                    this.error_txt.Text = AppResources.err_no_flash;
-                }
+                FlashLight();
 
                 var preload = new InfoPage();
             }
@@ -117,14 +122,15 @@ namespace the_flashlight
 
         public void Application_Activated()
         {
-            _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
+            FlashLight();
         }
 
         public void Application_Deactivated()
         {
             if (!_locked)
             {
-                _dev.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.Off);
+                _dev.Dispose();
+                _dev = null;
             }
         }
 
