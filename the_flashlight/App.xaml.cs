@@ -93,7 +93,10 @@ namespace the_flashlight
 
         private void Application_Obscured(object sender, ObscuredEventArgs e)
         {
-            main_page.Application_Obscured();
+            if (e.IsLocked)
+            {
+                main_page.Application_Obscured();
+            }
         }
 
         private void Application_Unobscured(object sender, object e)

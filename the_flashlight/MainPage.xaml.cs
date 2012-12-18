@@ -122,12 +122,15 @@ namespace the_flashlight
 
         public void Application_Activated()
         {
-            FlashLight();
+            if (_dev == null)
+            {
+                FlashLight();
+            }
         }
 
         public void Application_Deactivated()
         {
-            if (!_locked)
+            if (!_locked && _dev != null)
             {
                 _dev.Dispose();
                 _dev = null;
