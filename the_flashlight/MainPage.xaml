@@ -12,7 +12,7 @@
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    SupportedOrientations="Portrait" Orientation="Portrait" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100" shell:SystemTray.IsVisible="True">
+    SupportedOrientations="Portrait" Orientation="Portrait" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="WhiteSmoke" shell:SystemTray.Opacity="100">
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
@@ -20,7 +20,17 @@
         	<RowDefinition Height="*"/>
         </Grid.RowDefinitions>
     	<TextBlock x:Name="error_txt" HorizontalAlignment="Center" Height="161" Margin="95,304,95,303" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="290" Foreground="White" TextAlignment="Center"/>
-        <Rectangle HorizontalAlignment="Left" Height="1" Margin="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="480" Fill="Black" Stroke="Black"/>
+    	<Grid x:Name="statbar" Margin="0,1,1,770" Grid.RowSpan="2" HorizontalAlignment="Right">
+    		<Rectangle HorizontalAlignment="Left" Height="15" Margin="-2,8,0,0" VerticalAlignment="Top" Width="28" Stroke="White"/>
+    		<Rectangle x:Name="rect_bat" HorizontalAlignment="Left" Height="9" Margin="1,11,0,0" VerticalAlignment="Top" Width="22" Fill="White" Stroke="White"/>
+    		<Rectangle HorizontalAlignment="Left" Height="5" Margin="27,13,0,0" Stroke="White" VerticalAlignment="Top" Width="3" Fill="White"/>
+    		<TextBlock x:Name="time_txt" HorizontalAlignment="Left" Height="30" Margin="40,-1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" FontSize="20" FontFamily="Segoe WP SemiLight" Text="22:27" Foreground="White"/>
+    	</Grid>
+        <Rectangle x:Name="status_bar" Fill="White" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" Grid.RowSpan="2" Stroke="White" VerticalAlignment="Top" Width="460" >
+            <toolkit:GestureService.GestureListener>
+                <toolkit:GestureListener  Tap="StatusBar_Tap" />
+            </toolkit:GestureService.GestureListener>
+        </Rectangle>
     </Grid>
 
 </animation:AnimatedBasePage>

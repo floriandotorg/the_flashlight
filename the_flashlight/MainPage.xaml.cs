@@ -16,6 +16,8 @@ using WP7Contrib.View.Transitions.Animation;
 using Microsoft.Phone.Info;
 using Windows.Phone.Media.Capture;
 using Windows.Foundation;
+using Microsoft.Phone.Shell;
+using Windows.Phone.Devices.Power;
 
 namespace the_flashlight
 {
@@ -23,6 +25,9 @@ namespace the_flashlight
     {
         private AudioVideoCaptureDevice _dev;
         private bool _locked = false;
+        private System.Windows.Threading.DispatcherTimer _dt;
+        private Battery _battery;
+        private readonly double rect_bat_width = 0;
 
         private void FlashLight()
         {
@@ -56,6 +61,30 @@ namespace the_flashlight
             }
         }
 
+        void dt_Tick(object sender, EventArgs e)
+        {
+            string s = String.Format("{0:HH:mm}",DateTime.Now);
+            this.time_txt.Text = s;
+        }
+
+        private void OnRemainingChargePercentChanged(object sender, object e)
+        {
+            this.rect_bat.Width = rect_bat_width * ((double)_battery.RemainingChargePercent / 100.0);
+        }
+
+        private void StatbarInit()
+        {
+            dt_Tick(null, null);
+            _dt = new System.Windows.Threading.DispatcherTimer();
+            _dt.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            _dt.Tick += dt_Tick;
+            _dt.Start();
+
+            _battery = Battery.GetDefault();
+            OnRemainingChargePercentChanged(null, null);
+            _battery.RemainingChargePercentChanged += OnRemainingChargePercentChanged;
+        }
+
         // Konstruktor
         public MainPage()
         {
@@ -73,7 +102,11 @@ namespace the_flashlight
 
                 AnimationContext = LayoutRoot;
 
+                rect_bat_width = this.rect_bat.Width;
+
                 FlashLight();
+
+                StatbarInit();
 
                 var preload = new InfoPage();
             }
@@ -93,6 +126,21 @@ namespace the_flashlight
             Microsoft.Phone.Shell.ApplicationBarMenuItem appBarMenuItem = new Microsoft.Phone.Shell.ApplicationBarMenuItem(AppResources.about);
             appBarMenuItem.Click += ApplicationBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
+        }
+
+        private void StatusBar_Tap(object sender, Microsoft.Phone.Controls.GestureEventArgs e)
+        {
+            SystemTray.IsVisible = !SystemTray.IsVisible;
+            if (SystemTray.IsVisible)
+            {
+                //this.status_bar.Margin = new Thickness(this.status_bar.Margin.Left,100,this.status_bar.Margin.Right,this.status_bar.Margin.Bottom);
+                this.statbar.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                //this.status_bar.Margin = new Thickness(this.status_bar.Margin.Left, 3, this.status_bar.Margin.Right, this.status_bar.Margin.Bottom);
+                this.statbar.Visibility = Visibility.Visible;
+            }
         }
 
         protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)
