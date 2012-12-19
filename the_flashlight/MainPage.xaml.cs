@@ -128,7 +128,7 @@ namespace the_flashlight
             }
         }
 
-        public void Application_Deactivated()
+        private void FlashOff()
         {
             if (!_locked && _dev != null)
             {
@@ -137,14 +137,33 @@ namespace the_flashlight
             }
         }
 
-        public void Application_Obscured()
+        public void Application_Deactivated()
         {
-            _locked = true;
+            FlashOff();
+        }
+
+        public void Application_Obscured(bool locked)
+        {
+            if (locked)
+            {
+                _locked = true;
+            }
+            else
+            {
+                FlashOff();
+            }
         }
 
         public void Application_Unobscured()
         {
-            _locked = false;
+            if (!_locked)
+            {
+                FlashLight();
+            }
+            else
+            {
+                _locked = false;
+            }
         }
 
         public void Application_Error()
