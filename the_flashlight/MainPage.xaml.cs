@@ -126,22 +126,7 @@ namespace the_flashlight
             Microsoft.Phone.Shell.ApplicationBarMenuItem appBarMenuItem = new Microsoft.Phone.Shell.ApplicationBarMenuItem(AppResources.about);
             appBarMenuItem.Click += ApplicationBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
-        }
-
-        private void StatusBar_Tap(object sender, Microsoft.Phone.Controls.GestureEventArgs e)
-        {
-            SystemTray.IsVisible = !SystemTray.IsVisible;
-            if (SystemTray.IsVisible)
-            {
-                //this.status_bar.Margin = new Thickness(this.status_bar.Margin.Left,100,this.status_bar.Margin.Right,this.status_bar.Margin.Bottom);
-                this.statbar.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                //this.status_bar.Margin = new Thickness(this.status_bar.Margin.Left, 3, this.status_bar.Margin.Right, this.status_bar.Margin.Bottom);
-                this.statbar.Visibility = Visibility.Visible;
-            }
-        }
+        } 
 
         protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)
         {
