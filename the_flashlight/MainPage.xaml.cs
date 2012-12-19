@@ -27,6 +27,7 @@ namespace the_flashlight
         private System.Windows.Threading.DispatcherTimer _dt;
         private Battery _battery;
         private readonly double rect_bat_width = 0;
+        private bool onInfoPage = false;
 
         private void FlashLight()
         {
@@ -66,9 +67,26 @@ namespace the_flashlight
             this.time_txt.Text = s;
         }
 
-        private void OnRemainingChargePercentChanged(object sender, object e)
+        private void BatteryUpdate(object sender, object e)
         {
-            this.rect_bat.Width = rect_bat_width * ((double)_battery.RemainingChargePercent / 100.0);
+            if (!onInfoPage)
+            {
+                Dispatcher.BeginInvoke(() =>
+                    {
+                        if (DeviceStatus.PowerSource == PowerSource.Battery)
+                        {
+                            SystemTray.IsVisible = false;
+                            this.statbar.Visibility = Visibility.Visible;
+                            this.rect_bat.Width = rect_bat_width * ((double)_battery.RemainingChargePercent / 100.0);
+                        }
+                        else
+                        {
+                            SystemTray.IsVisible = true;
+                            this.statbar.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                );
+            }
         }
 
         private void StatbarInit()
@@ -80,8 +98,10 @@ namespace the_flashlight
             _dt.Start();
 
             _battery = Battery.GetDefault();
-            OnRemainingChargePercentChanged(null, null);
-            _battery.RemainingChargePercentChanged += OnRemainingChargePercentChanged;
+            BatteryUpdate(null, null);
+
+            _battery.RemainingChargePercentChanged += BatteryUpdate;
+            DeviceStatus.PowerSourceChanged += BatteryUpdate;
         }
 
         // Konstruktor
@@ -149,6 +169,7 @@ namespace the_flashlight
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
+            onInfoPage = true;
             NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
         }
 
@@ -172,6 +193,13 @@ namespace the_flashlight
         public void Application_Error()
         {
             this.error_txt.Text = AppResources.err_unknown;
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            onInfoPage = false;
+            BatteryUpdate(null, null);
+            base.OnNavigatedTo(e);
         }
     }
 }
