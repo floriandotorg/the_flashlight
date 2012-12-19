@@ -143,19 +143,6 @@ namespace the_flashlight
             _videoCamera.StopRecording();
         }
 
-        public void Application_Obscured(bool locked)
-        {
-            if (!locked)
-            {
-                _videoCamera.StopRecording();
-            }
-        }
-
-        public void Application_Unobscured()
-        {
-            _videoCameraVisualizer.SetSource(_videoCamera);
-        }
-
         public void Application_Error()
         {
             this.error_txt.Text = AppResources.err_unknown;

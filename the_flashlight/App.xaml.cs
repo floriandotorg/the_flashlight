@@ -91,16 +91,6 @@ namespace the_flashlight
         {
         }
 
-        private void Application_Obscured(object sender, ObscuredEventArgs e)
-        {
-            main_page.Application_Obscured(e.IsLocked);
-        }
-
-        private void Application_Unobscured(object sender, object e)
-        {
-            main_page.Application_Unobscured();
-        }
-
         // Code, der bei einem Navigationsfehler ausgeführt wird
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
@@ -144,8 +134,6 @@ namespace the_flashlight
             // aktiv bleiben, bis die Anwendung bereit für das Rendern ist.
             RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
-            RootFrame.Obscured += Application_Obscured;
-            RootFrame.Unobscured += Application_Unobscured;
 
             // Navigationsfehler behandeln
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
