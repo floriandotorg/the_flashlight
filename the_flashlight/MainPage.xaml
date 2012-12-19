@@ -26,6 +26,7 @@
     		<Rectangle HorizontalAlignment="Left" Height="5" Margin="27,13,0,0" Stroke="White" VerticalAlignment="Top" Width="3" Fill="White"/>
     		<TextBlock x:Name="time_txt" HorizontalAlignment="Left" Height="30" Margin="40,-1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" FontSize="20" FontFamily="Segoe WP SemiLight" Text="22:27" Foreground="White"/>
     	</Grid>
+    	<Rectangle HorizontalAlignment="Left" Height="1" Margin="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="480" Fill="Black" Stroke="Black"/>
     </Grid>
 
 </animation:AnimatedBasePage>
