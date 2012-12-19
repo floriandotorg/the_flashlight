@@ -22,7 +22,6 @@ namespace the_flashlight
     public partial class MainPage : AnimatedBasePage
     {
         private AudioVideoCaptureDevice _dev;
-        private bool _locked = false;
 
         private void FlashLight()
         {
@@ -130,21 +129,11 @@ namespace the_flashlight
 
         public void Application_Deactivated()
         {
-            if (!_locked && _dev != null)
+            if (_dev != null)
             {
                 _dev.Dispose();
                 _dev = null;
             }
-        }
-
-        public void Application_Obscured()
-        {
-            _locked = true;
-        }
-
-        public void Application_Unobscured()
-        {
-            _locked = false;
         }
 
         public void Application_Error()
