@@ -73,7 +73,7 @@ namespace the_flashlight
             {
                 Dispatcher.BeginInvoke(() =>
                     {
-                        if (DeviceStatus.PowerSource == PowerSource.Battery)
+                        if (DeviceStatus.PowerSource == PowerSource.Battery || System.Diagnostics.Debugger.IsAttached)
                         {
                             SystemTray.IsVisible = false;
                             this.statbar.Visibility = Visibility.Visible;
@@ -113,18 +113,16 @@ namespace the_flashlight
                 (App.Current.Resources["PhoneDisabledBrush"] as SolidColorBrush).Color = Colors.White;
                 (App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush).Color = Colors.Black;
 
+                //AnimationContext = LayoutRoot;
+
                 InitializeComponent();
 
-                BuildApplicationBar();
-
                 (App.Current as the_flashlight.App).main_page = this;
-
-                AnimationContext = LayoutRoot;
-
                 rect_bat_width = this.rect_bat.Width;
 
                 FlashLight();
 
+                BuildApplicationBar();
                 StatbarInit();
 
                 var preload = new InfoPage();
