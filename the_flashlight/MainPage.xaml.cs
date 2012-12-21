@@ -16,12 +16,18 @@ using WP7Contrib.View.Transitions.Animation;
 using Microsoft.Phone.Info;
 using Windows.Phone.Media.Capture;
 using Windows.Foundation;
+using Microsoft.Phone.Shell;
+using Windows.Phone.Devices.Power;
 
 namespace the_flashlight
 {
     public partial class MainPage : AnimatedBasePage
     {
         private AudioVideoCaptureDevice _dev;
+        private System.Windows.Threading.DispatcherTimer _dt;
+        private Battery _battery;
+        private readonly double rect_bat_width = 0;
+        private bool onInfoPage = false;
 
         private void FlashLight()
         {
@@ -55,6 +61,49 @@ namespace the_flashlight
             }
         }
 
+        void dt_Tick(object sender, EventArgs e)
+        {
+            string s = String.Format("{0:HH:mm}",DateTime.Now);
+            this.time_txt.Text = s;
+        }
+
+        private void BatteryUpdate(object sender, object e)
+        {
+            if (!onInfoPage)
+            {
+                Dispatcher.BeginInvoke(() =>
+                    {
+                        if (DeviceStatus.PowerSource == PowerSource.Battery)
+                        {
+                            SystemTray.IsVisible = false;
+                            this.statbar.Visibility = Visibility.Visible;
+                            this.rect_bat.Width = rect_bat_width * ((double)_battery.RemainingChargePercent / 100.0);
+                        }
+                        else
+                        {
+                            SystemTray.IsVisible = true;
+                            this.statbar.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                );
+            }
+        }
+
+        private void StatbarInit()
+        {
+            dt_Tick(null, null);
+            _dt = new System.Windows.Threading.DispatcherTimer();
+            _dt.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            _dt.Tick += dt_Tick;
+            _dt.Start();
+
+            _battery = Battery.GetDefault();
+            BatteryUpdate(null, null);
+
+            _battery.RemainingChargePercentChanged += BatteryUpdate;
+            DeviceStatus.PowerSourceChanged += BatteryUpdate;
+        }
+
         // Konstruktor
         public MainPage()
         {
@@ -72,7 +121,11 @@ namespace the_flashlight
 
                 AnimationContext = LayoutRoot;
 
+                rect_bat_width = this.rect_bat.Width;
+
                 FlashLight();
+
+                StatbarInit();
 
                 var preload = new InfoPage();
             }
@@ -92,7 +145,7 @@ namespace the_flashlight
             Microsoft.Phone.Shell.ApplicationBarMenuItem appBarMenuItem = new Microsoft.Phone.Shell.ApplicationBarMenuItem(AppResources.about);
             appBarMenuItem.Click += ApplicationBarMenuItem_Click;
             ApplicationBar.MenuItems.Add(appBarMenuItem);
-        }
+        } 
 
         protected override AnimatorHelperBase GetAnimation(AnimationType animationType, Uri toOrFrom)
         {
@@ -116,6 +169,7 @@ namespace the_flashlight
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
+            onInfoPage = true;
             NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
         }
 
@@ -139,6 +193,13 @@ namespace the_flashlight
         public void Application_Error()
         {
             this.error_txt.Text = AppResources.err_unknown;
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            onInfoPage = false;
+            BatteryUpdate(null, null);
+            base.OnNavigatedTo(e);
         }
     }
 }

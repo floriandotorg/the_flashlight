@@ -20,7 +20,13 @@
         	<RowDefinition Height="*"/>
         </Grid.RowDefinitions>
     	<TextBlock x:Name="error_txt" HorizontalAlignment="Center" Height="161" Margin="95,304,95,303" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="290" Foreground="White" TextAlignment="Center"/>
-        <Rectangle HorizontalAlignment="Left" Height="1" Margin="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="480" Fill="Black" Stroke="Black"/>
+    	<Grid x:Name="statbar" Margin="0,1,1,770" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top">
+    		<Rectangle HorizontalAlignment="Left" Height="15" Margin="-2,8,0,0" VerticalAlignment="Top" Width="28" Stroke="White"/>
+    		<Rectangle x:Name="rect_bat" HorizontalAlignment="Left" Height="9" Margin="1,11,0,0" VerticalAlignment="Top" Width="22" Fill="White" Stroke="White"/>
+    		<Rectangle HorizontalAlignment="Left" Height="5" Margin="27,13,0,0" Stroke="White" VerticalAlignment="Top" Width="3" Fill="White"/>
+    		<TextBlock x:Name="time_txt" HorizontalAlignment="Left" Height="30" Margin="40,-1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" FontSize="20" FontFamily="Segoe WP SemiLight" Text="22:27" Foreground="White"/>
+    	</Grid>
+    	<Rectangle HorizontalAlignment="Left" Height="1" Margin="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="480" Fill="Black" Stroke="Black"/>
     </Grid>
 
 </animation:AnimatedBasePage>
