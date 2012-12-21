@@ -29,7 +29,7 @@ namespace the_flashlight
 
             // Get Version
             var versionAttrib = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
-            version_str = versionAttrib.Version.ToString();
+            version_str = versionAttrib.Version.ToString().Substring(0, 3);
 
             this.version_text.Text = this.version_text.Text.Replace("0.0.0.0", version_str);
         }
