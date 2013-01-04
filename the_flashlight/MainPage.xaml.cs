@@ -93,8 +93,7 @@ namespace the_flashlight
         {
             this.Dispatcher.BeginInvoke(() =>
                 {
-                    TransitionFrame frame = (TransitionFrame)App.Current.RootVisual;
-                    frame.IsEnabled = true;
+                    (App.Current.RootVisual as TransitionFrame).IsEnabled = true;
                 }
             );
         }
@@ -137,9 +136,7 @@ namespace the_flashlight
 
         public void Application_Deactivated()
         {
-            TransitionFrame frame = (TransitionFrame)App.Current.RootVisual;
-            frame.IsEnabled = false;
-
+            (App.Current.RootVisual as TransitionFrame).IsEnabled = false;
             _videoCamera.StopRecording();
         }
 
