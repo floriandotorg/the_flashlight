@@ -113,7 +113,7 @@ namespace the_flashlight
                 (App.Current.Resources["PhoneDisabledBrush"] as SolidColorBrush).Color = Colors.White;
                 (App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush).Color = Colors.Black;
 
-                //AnimationContext = LayoutRoot;
+                AnimationContext = LayoutRoot;
 
                 InitializeComponent();
 
