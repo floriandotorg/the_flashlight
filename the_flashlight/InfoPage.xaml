@@ -30,12 +30,14 @@
 
 		<!--ContentPanel-Objekt - Fügen Sie zusätzlichen Inhalt hier ein.-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock x:Name="version_text" Margin="8,6,108,0" TextWrapping="Wrap" Height="87" VerticalAlignment="Top" Foreground="White"><Run Text="{Binding Path=LocalizedResources.version, Source={StaticResource LocalizedStrings}}"/><Run Text=" 0.0.0.0" /></TextBlock>
-            <Button Margin="-4,422,204,0" Content="{Binding Path=LocalizedResources.rate_and_review, Source={StaticResource LocalizedStrings}}" Click="rate_click" Height="72" VerticalAlignment="Top" />
-            <Button Height="72" Margin="-4,243,204,0" VerticalAlignment="Top" Content="{Binding Path=LocalizedResources.contact_support, Source={StaticResource LocalizedStrings}}" Click="contact_click" />
+            <TextBlock x:Name="version_text" Margin="8,570,108,0" TextWrapping="Wrap" Height="27" VerticalAlignment="Top" Foreground="White"><Run Text="{Binding Path=LocalizedResources.version, Source={StaticResource LocalizedStrings}}"/><Run Text=" 0.0.0.0" /></TextBlock>
+            <Button Margin="-4,356,204,0" Content="{Binding Path=LocalizedResources.rate_and_review, Source={StaticResource LocalizedStrings}}" Click="rate_click" Height="72" VerticalAlignment="Top" />
+            <Button Height="72" Margin="-4,100,204,0" VerticalAlignment="Top" Content="{Binding Path=LocalizedResources.contact_support, Source={StaticResource LocalizedStrings}}" Click="contact_click" />
 			<Image HorizontalAlignment="Left" Source="floyd.png" Stretch="Fill" Width="96" Height="146" VerticalAlignment="Top" Margin="-4,-152,0,0"/>
-            <TextBlock Margin="8,362,64,0" TextWrapping="Wrap" Foreground="#FF8B8B8B" Text="{Binding Path=LocalizedResources.review, Source={StaticResource LocalizedStrings}}" Height="56" VerticalAlignment="Top"/>
-            <TextBlock Margin="8,183,12,0" TextWrapping="Wrap" Foreground="#FF8B8B8B" Height="56" VerticalAlignment="Top"><Run Text="{Binding Path=LocalizedResources.support, Source={StaticResource LocalizedStrings}}" /></TextBlock>
+            <TextBlock Margin="8,289,64,0" TextWrapping="Wrap" Foreground="#FF8B8B8B" Text="{Binding Path=LocalizedResources.review, Source={StaticResource LocalizedStrings}}" Height="56" VerticalAlignment="Top"/>
+            <TextBlock Margin="8,33,12,0" TextWrapping="Wrap" Foreground="#FF8B8B8B" Height="56" VerticalAlignment="Top"><Run Text="{Binding Path=LocalizedResources.support, Source={StaticResource LocalizedStrings}}" /></TextBlock>
+            <Path Data="M110.5,74 L300.5,74" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="-101,0,-57,512" Stretch="Fill" Stroke="White" UseLayoutRounding="False" VerticalAlignment="Bottom" Width="614" Visibility="Collapsed"/>
+            <Path Data="M110.5,74 L300.5,74" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="-101,0,-57,256" Stretch="Fill" Stroke="White" UseLayoutRounding="False" VerticalAlignment="Bottom" Width="614" Visibility="Collapsed"/>
 		</Grid>
         <Rectangle HorizontalAlignment="Left" Height="1" Margin="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="480" Fill="Black" Stroke="Black"/>
     </Grid>
