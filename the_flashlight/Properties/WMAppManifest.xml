@@ -3,7 +3,6 @@
   <App xmlns="" ProductID="{c3b30634-93ac-4d34-b8f4-71f1f85d18a9}" Title="The Flashlight" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Floyd UG (haftungsbeschränkt)" Description="A simple flashlight" Publisher="Floyd UG (haftungsbeschränkt)">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
-      <Capability Name="ID_CAP_MEDIALIB" />
       <Capability Name="ID_CAP_ISV_CAMERA" />
       <Capability Name="ID_CAP_MICROPHONE" />
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
