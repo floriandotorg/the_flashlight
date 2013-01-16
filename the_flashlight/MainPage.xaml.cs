@@ -76,14 +76,16 @@ namespace the_flashlight
                         if (DeviceStatus.PowerSource == PowerSource.Battery || System.Diagnostics.Debugger.IsAttached)
                         {
                             SystemTray.IsVisible = false;
-                            this.statbar.Visibility = Visibility.Visible;
                             this.rect_bat.Width = rect_bat_width * ((double)_battery.RemainingChargePercent / 100.0);
                         }
                         else
                         {
                             SystemTray.IsVisible = true;
-                            this.statbar.Visibility = Visibility.Collapsed;
                         }
+
+                        this.statbar.Visibility = SystemTray.IsVisible ? Visibility.Collapsed : Visibility.Visible;
+                    
+                        
                     }
                 );
             }
