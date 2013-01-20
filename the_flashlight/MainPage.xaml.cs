@@ -46,7 +46,7 @@ namespace the_flashlight
                 && AudioVideoCaptureDevice.GetSupportedPropertyValues(CameraSensorLocation.Back, KnownCameraAudioVideoProperties.VideoTorchMode).ToList().Contains((UInt32)VideoTorchMode.On))
                 && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
             {
-                IAsyncOperation<AudioVideoCaptureDevice> dev_async_op = AudioVideoCaptureDevice.OpenAsync(CameraSensorLocation.Back, AudioVideoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back).First());
+                IAsyncOperation<AudioVideoCaptureDevice> dev_async_op = AudioVideoCaptureDevice.OpenAsync(CameraSensorLocation.Back, AudioVideoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back).Last());
 
                 dev_async_op.Completed = (IAsyncOperation<AudioVideoCaptureDevice> dev, Windows.Foundation.AsyncStatus status) =>
                 {
