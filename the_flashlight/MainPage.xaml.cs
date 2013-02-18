@@ -15,6 +15,8 @@ using Flashlight;
 using System.Reflection;
 using WP7Contrib.View.Transitions.Animation;
 using Microsoft.Phone.Info;
+using utility;
+using System.IO.IsolatedStorage;
 
 namespace the_flashlight
 {
@@ -35,6 +37,11 @@ namespace the_flashlight
                 InitializeComponent();
 
                 BuildApplicationBar();
+
+                using (var storage = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    storage.DeletePath("");
+                }
 
                 (App.Current as the_flashlight.App).main_page = this;
 
