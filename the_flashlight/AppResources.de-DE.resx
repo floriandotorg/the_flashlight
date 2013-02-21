@@ -132,6 +132,9 @@
   <data name="err_unknown" xml:space="preserve">
     <value>Ein Fehler ist aufgetreten. Bitte starten Sie die App neu.</value>
   </data>
+  <data name="err_win8" xml:space="preserve">
+    <value>Fehler: Diese App erfordert Windows Phone 7.</value>
+  </data>
   <data name="err_xenon" xml:space="preserve">
     <value>Dieses Telefon hat ein Xenon-Licht und kann nicht als Taschenlampe verwendet werden.</value>
   </data>

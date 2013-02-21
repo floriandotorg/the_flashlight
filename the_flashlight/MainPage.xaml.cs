@@ -49,7 +49,7 @@ namespace the_flashlight
 
                 string deviceNameStr = "unknown device";
                 object deviceName;
-                if(DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
+                if (DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
                 {
                     deviceNameStr = deviceName.ToString(); 
                 }
@@ -57,6 +57,10 @@ namespace the_flashlight
                 if (deviceNameStr.Contains("Mozart"))
                 {
                     this.error_txt.Text = AppResources.err_xenon;
+                }
+                else if (System.Environment.OSVersion.Version.Major != 7)
+                {
+                    this.error_txt.Text = AppResources.err_win8;
                 }
                 else if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary) && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
                 {
