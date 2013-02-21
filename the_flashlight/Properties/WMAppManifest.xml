@@ -4,7 +4,7 @@
   <Languages xmlns="">
     <Language code="de-DE" />
   </Languages>
-  <App xmlns="" ProductID="{358f0a2b-2749-48b8-8380-4173696b1d16}" Title="The Flashlight" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Floyd UG (haftungsbeschränkt)" Description="A simple flashlight" Publisher="Floyd UG (haftungsbeschränkt)" PublisherID="{b8a4fbfe-dc02-4435-9d28-5b762a2810d8}">
+  <App xmlns="" ProductID="{358f0a2b-2749-48b8-8380-4173696b1d16}" Title="The Flashlight" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal" Author="Floyd UG (haftungsbeschränkt)" Description="A simple flashlight" Publisher="Floyd UG (haftungsbeschränkt)" PublisherID="{b8a4fbfe-dc02-4435-9d28-5b762a2810d8}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_ISV_CAMERA" />

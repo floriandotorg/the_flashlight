@@ -130,7 +130,7 @@
     <value>This device doesn't have a flashlight. Application won't work.</value>
   </data>
   <data name="err_unknown" xml:space="preserve">
-    <value>A error occured. Please restart the application.</value>
+    <value>An error occured. Please restart the application.</value>
   </data>
   <data name="err_xenon" xml:space="preserve">
     <value>This device has a xenon flash which cannot be used as flashlight.</value>
