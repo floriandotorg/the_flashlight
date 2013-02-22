@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="en-US" />
+  <DefaultLanguage xmlns="" code="en" />
   <Languages xmlns="">
-    <Language code="de-DE" />
+    <Language code="de" />
+    <Language code="en" />
   </Languages>
-  <App xmlns="" ProductID="{358f0a2b-2749-48b8-8380-4173696b1d16}" Title="The Flashlight" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal" Author="Floyd UG (haftungsbeschränkt)" Description="A simple flashlight" Publisher="Floyd UG (haftungsbeschränkt)" PublisherID="{b8a4fbfe-dc02-4435-9d28-5b762a2810d8}">
-    <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+  <App xmlns="" ProductID="{358f0a2b-2749-48b8-8380-4173696b1d16}" Title="The Flashlight" RuntimeType="Silverlight" Version="1.2.0.0" Genre="apps.normal" Author="Floyd UG (haftungsbeschränkt)" Description="A simple flashlight" Publisher="Floyd UG (haftungsbeschränkt)" PublisherID="{b8a4fbfe-dc02-4435-9d28-5b762a2810d8}">
+    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_ISV_CAMERA" />
       <Capability Name="ID_CAP_MICROPHONE" />
@@ -17,9 +18,9 @@
     <Tokens>
       <PrimaryToken TokenID="the_flashlightToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsResource="false" IsRelative="true">Background.png</SmallImageURI>
+          <SmallImageURI IsResource="false" IsRelative="true">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsResource="false" IsRelative="true">Background.png</BackgroundImageURI>
+          <BackgroundImageURI IsResource="false" IsRelative="true">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
           <Title>The Flashlight</Title>
           <BackContent>
           </BackContent>
@@ -27,9 +28,13 @@
           </BackBackgroundImageURI>
           <BackTitle>
           </BackTitle>
+          <LargeBackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileLarge.png</LargeBackgroundImageURI>
+          <LargeBackContent />
+          <LargeBackBackgroundImageURI IsRelative="true" IsResource="false">
+          </LargeBackBackgroundImageURI>
           <DeviceLockImageURI>
           </DeviceLockImageURI>
-          <HasLarge>false</HasLarge>
+          <HasLarge>True</HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
