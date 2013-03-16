@@ -32,9 +32,7 @@ namespace the_flashlight
         {
             try
             {
-                (App.Current.Resources["PhoneForegroundBrush"] as SolidColorBrush).Color = Colors.White;
-                (App.Current.Resources["PhoneDisabledBrush"] as SolidColorBrush).Color = Colors.White;
-                (App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush).Color = Colors.Black;
+                ThemeManager.ToDarkTheme();
 
                 InitializeComponent();
 
