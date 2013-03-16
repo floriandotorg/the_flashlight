@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -17,6 +16,8 @@ using WP7Contrib.View.Transitions.Animation;
 using Microsoft.Phone.Info;
 using utility;
 using System.IO.IsolatedStorage;
+using Microsoft.Phone;
+using Microsoft.Xna.Framework.Audio;
 
 namespace the_flashlight
 {
@@ -24,6 +25,7 @@ namespace the_flashlight
     {
         private VideoCamera _videoCamera;
         private VideoCameraVisualizer _videoCameraVisualizer;
+        private Microphone _mic; //marketplace capabilities detector
 
         // Konstruktor
         public MainPage()
