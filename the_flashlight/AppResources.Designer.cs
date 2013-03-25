@@ -124,6 +124,24 @@ namespace the_flashlight {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die pause music ähnelt.
+        /// </summary>
+        public static string pause_button {
+            get {
+                return ResourceManager.GetString("pause_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You need to pause the music to turn on the camera flash. ähnelt.
+        /// </summary>
+        public static string pause_music {
+            get {
+                return ResourceManager.GetString("pause_music", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die rate and review ähnelt.
         /// </summary>
         public static string rate_and_review {

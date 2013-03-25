@@ -138,6 +138,12 @@
   <data name="err_xenon" xml:space="preserve">
     <value>Dieses Telefon hat ein Xenon-Licht und kann nicht als Taschenlampe verwendet werden.</value>
   </data>
+  <data name="pause_button" xml:space="preserve">
+    <value>musik pausieren</value>
+  </data>
+  <data name="pause_music" xml:space="preserve">
+    <value>Die Hintergrundmusik muss pausiert werden, um die Lampe einzuschalten.</value>
+  </data>
   <data name="rate_and_review" xml:space="preserve">
     <value>bewerten</value>
   </data>

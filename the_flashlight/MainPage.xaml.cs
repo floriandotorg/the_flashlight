@@ -18,6 +18,7 @@ using utility;
 using System.IO.IsolatedStorage;
 using Microsoft.Phone;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace the_flashlight
 {
@@ -47,11 +48,25 @@ namespace the_flashlight
 
                 AnimationContext = LayoutRoot;
 
+                turnOnFlash(false);
+
+                var preload = new InfoPage();
+            }
+            catch
+            {
+                Application_Error();
+            }
+        }
+
+        private void turnOnFlash(bool pauseMusic)
+        {
+            try
+            {
                 string deviceNameStr = "unknown device";
                 object deviceName;
                 if (DeviceExtendedProperties.TryGetValue("DeviceName", out deviceName))
                 {
-                    deviceNameStr = deviceName.ToString(); 
+                    deviceNameStr = deviceName.ToString();
                 }
 
                 if (deviceNameStr.Contains("Mozart"))
@@ -61,6 +76,11 @@ namespace the_flashlight
                 else if (System.Environment.OSVersion.Version.Major != 7)
                 {
                     this.error_txt.Text = AppResources.err_win8;
+                }
+                else if (!pauseMusic && Microsoft.Xna.Framework.Media.MediaPlayer.State == MediaState.Playing)
+                {
+                    this.error_txt.Text = AppResources.pause_music;
+                    this.pauseButton.Visibility = Visibility.Visible;
                 }
                 else if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary) && Microsoft.Devices.Environment.DeviceType != DeviceType.Emulator)
                 {
@@ -78,13 +98,18 @@ namespace the_flashlight
                 {
                     this.error_txt.Text = AppResources.err_no_flash;
                 }
-
-                var preload = new InfoPage();
             }
             catch
             {
                 Application_Error();
             }
+        }
+
+        private void pauseButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            turnOnFlash(true);
+            this.error_txt.Text = "";
+            this.pauseButton.Visibility = Visibility.Collapsed;
         }
 
         private void BuildApplicationBar()
@@ -142,13 +167,23 @@ namespace the_flashlight
 
         public void Application_Activated()
         {
-            _videoCameraVisualizer.SetSource(_videoCamera);
+            if (_videoCamera != null)
+            {
+                _videoCameraVisualizer.SetSource(_videoCamera);
+            }
+            else
+            {
+                (App.Current.RootVisual as TransitionFrame).IsEnabled = true;
+            }
         }
 
         public void Application_Deactivated()
         {
             (App.Current.RootVisual as TransitionFrame).IsEnabled = false;
-            _videoCamera.StopRecording();
+            if (_videoCamera != null)
+            {
+                _videoCamera.StopRecording();
+            }
         }
 
         public void Application_Error()
