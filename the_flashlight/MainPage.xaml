@@ -20,7 +20,7 @@
         	<RowDefinition Height="*"/>
         </Grid.RowDefinitions>
     	<TextBlock x:Name="error_txt" HorizontalAlignment="Center" Height="161" Margin="95,248,95,359" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="290" Foreground="White" TextAlignment="Center"/>
-        <Button x:Name="pauseButton" Content="{Binding Path=LocalizedResources.pause_button, Source={StaticResource LocalizedStrings}}" Height="75" Margin="110,405,110,0" Grid.RowSpan="2" VerticalAlignment="Top" Click="pauseButton_Click"/>
+        <Button x:Name="pauseButton" Content="{Binding Path=LocalizedResources.pause_button, Source={StaticResource LocalizedStrings}}" Height="75" Margin="110,405,110,0" Grid.RowSpan="2" VerticalAlignment="Top" Click="pauseButton_Click" Visibility="Collapsed"/>
     </Grid>
 
 </animation:AnimatedBasePage>
